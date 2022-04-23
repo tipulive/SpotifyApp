@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -16,13 +16,13 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+   // return view('welcome');
 });
 
-Route::get('/auth/login', [AuthController::class, 'login']);
-Route::get('/auth/callback', [AuthController::class, 'callback']);
+Route::get('/auth/login', [UserController::class, 'Userlogin']);
+Route::get('/auth/callback', [UserController::class, 'UserCallback']);
+Route::get('/users', [UserController::class, 'UsersDetails']);
+Route::get('/userStore_listening', [UserController::class, 'UserStore_listening']);
+Route::get('/user_listening', [UserController::class, 'UserListening']);
+//Route::get('/UpdateToken', [UserController::class, 'UpdateToken']);
 Route::get('/logout', [AuthController::class, 'logout']);
-Route::get('/users', [AuthController::class, 'users']);
-Route::get('/userStore_listening', [AuthController::class, 'userStore_listening']);
-Route::get('/user_listening', [AuthController::class, 'user_listening']);
-Route::get('/UpdateToken', [AuthController::class, 'UpdateToken']);

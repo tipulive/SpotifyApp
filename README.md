@@ -52,20 +52,11 @@ You will need the following things properly installed on your computer.
 
 - [\logout`](http://localhost:8000/logout) :to logout 
 
-
 ### Running Tests 
 
-* `python manage.py test`
-* `Preview Test`
-![Preview Test](https://user-images.githubusercontent.com/15068184/129511257-683c9ddb-7ed6-492a-b9bc-f4327cb9aed2.gif)
-
-
-### Running REST API Client(Extra)
-
-* `open Rest Client\Weather.rest` and test all endpoint inside there or if you do not have it download this VSCODE extension [Rest Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
-
-* or if you have `postman` check all API inside `Weather.rest`
-
+* `php artisan test` on your Terminal
 ### Note
 
 * i have decided to use only routes/web.php instead of API because it is a small project and it is web project too
+
+* this is only Feature Testing

@@ -8,9 +8,6 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Http;
 use App\Models\User;
-use App\Models\Listening;
-
-
 use Auth;
 use DB;
 
@@ -67,10 +64,9 @@ class AuthController extends Controller
 
 
     }
-    public function Users(){//Get all users
+    public function UsersDetails(){//Get all users
 
-        if(Auth::check())
-        {
+
             $check=DB::select("select id,email,name,avatar,provider_id as  Spotify_id from users");
             if($check)
             {
@@ -89,127 +85,14 @@ class AuthController extends Controller
 
                 ],200);
             }
-        }
-        else{
-            return response([
-                "result"=>false,
-                "status"=>"403",
-                "message"=>"unauthenticated Please Login",
 
-            ],201);
-        }
+
 
 
     }
-    public function userStore_listening(){//Store on table Listening and print response object
-        if(Auth::check())
-        {
-
-            $response = Http::withToken(Auth::user()->Token)//use Http client with Bear Token come From Authenticate User to get recently-played
-                       ->get("{$this->Spotify_url}/v1/me/player/recently-played");
-
-        Listening::updateOrCreate([//use Listening Model to Add new Data or update when Data is available
-            'user_id'=>Auth::user()->provider_id,
-            'played_at'=>$response->object()->items[0]->played_at,
-        ], [
-            'artist_id'=>$response->object()->items[0]->track->artists[0]->id,
-            'spotify_track_id'=>$response->object()->items[0]->track->id,
-            'track_name'=>$response->object()->items[0]->track->name,
-
-        ]);
-        return response([
-            "result"=>true,
-            "status"=>200,
-            "resultData"=>$response->object(),
 
 
-        ],200);
 
-        }
-        else{
-            return response([
-                "result"=>false,
-                "status"=>"403",
-                "message"=>"unauthenticated Please Login",
-
-            ],201);
-        }
-    }
-    public function user_listening(){//Get all recently played track from tables
-
-        if(Auth::check())
-        {
-            $check=DB::select("select id, user_id, artist_id, spotify_track_id, track_name,played_at from listenings");
-            if($check)
-            {
-                return response([
-                    "result"=>true,
-                    "resultData"=>$check
-
-
-                ],200);
-            }
-            else{
-                return response([
-                    "result"=>false,
-                    "resultData"=>"no data Found"
-
-
-                ],200);
-            }
-        }
-        else{
-            return response([
-                "result"=>false,
-                "status"=>"403",
-                "message"=>"unauthenticated Please Login",
-
-            ],201);
-        }
-
-
-    }
-    public function UpdateToken(Request $request){//Get new Token using Refresh Token come From table
-
-        $url  = "https://accounts.spotify.com/api/token";
-        $data = [
-        "client_id"=> env('SPOTIFY_CLIENT_ID'),
-        "client_secret" =>env('SPOTIFY_CLIENT_SECRET'),
-        "refresh_token"=>Auth::user()->refreshToken,
-        "grant_type" =>'refresh_token'
-        ];
-
-        $ch = curl_init($url);//here i did use Curl way
-
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        $result = curl_exec($ch);
-        $err    = curl_error($ch);
-
-        curl_close($ch);
-
-        if ($err) {
-            return Auth::user()->Token;
-        }
-        $result = json_decode($result, true);
-        $check=User::where('id',Auth::user()->id)
-        ->update([
-           'Token'=>$result["access_token"]
-         ]);
-         if($check)
-         {
-            return response([
-                "result"=>true,
-                "status"=>Auth::user()->refreshToken,
-                "message"=>$result["access_token"],
-
-            ],200);
-         }
-
-    }
     public function logout(){
         Auth::logout();
     }
