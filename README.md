@@ -1,64 +1,71 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+﻿# Weather-Forecast
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# SpotifyApp Preview 
+![Preview](https://user-images.githubusercontent.com/80526946/164886008-a0e03514-be79-4139-aced-c57873d9d86b.gif)
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Prerequisites
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+You will need the following things properly installed on your computer.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* [Git](https://git-scm.com/) or any Terminal(command)
+* [Php and laravel](https://laravel.com/docs/8.x/http-tests) 
+* [Xamp server](https://www.apachefriends.org/index.html/) then make sure Mysql and Apache service are running
+* [Google Chrome](https://google.com/chrome/) or any others browsers
 
-## Learning Laravel
+## API and Credentials
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+* [Visit Spotify to Setup Credentials](https://developer.spotify.com/dashboard/) login or create Account there
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* Create APP there and add your redirect url
+* Copy SPOTIFY_CLIENT_ID,SPOTIFY_CLIENT,SPOTIFY_REDIRECT_URI and fill in your .env.example file
+* if you are using Development mode make sure you will add Users and Access 
 
-## Laravel Sponsors
+## Installation('Windows')
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+* Open Your Terminal or Git Console
+* Type `git clone https://github.com/tipulive/SpotifyApp.git` 
+* Type `cd SpotifyApp`
+* `under SpotifyApp Folder open .env.example fill`
+- SPOTIFY_CLIENT_ID
+- SPOTIFY_CLIENT
+- SPOTIFY_REDIRECT_URI
+- DB_DATABASE
+- DB_USERNAME
+- DB_PASSWORD
 
-### Premium Partners
+* `change .env.example file to .env`
+* Type `php artisan migrate` in your Terminal to migrate your Database
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+## Running / Development
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+* Type `php artisan serve` Terminal under Project folder to run This Project.
+* [open Your Browser and visite](http://localhost:8000/auth/login)  this is to Authenticate or signup then call back will save callback payload data(user profile info ) to database
+- ## Run Some Application End Point
+- [\users`](http://localhost:8000/users) :to view all saved users from database
+- [\userStore_listening`](http://localhost:8000/userStore_listening) :to get recently-played from Spotify and Store in Database from 
 
-## Security Vulnerabilities
+- [\user_listening`](http://localhost:8000/user_listening) :to view all saved recently-played from database
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- [\logout`](http://localhost:8000/logout) :to logout 
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Running Tests 
+
+* `python manage.py test`
+* `Preview Test`
+![Preview Test](https://user-images.githubusercontent.com/15068184/129511257-683c9ddb-7ed6-492a-b9bc-f4327cb9aed2.gif)
+
+
+### Running REST API Client(Extra)
+
+* `open Rest Client\Weather.rest` and test all endpoint inside there or if you do not have it download this VSCODE extension [Rest Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+
+* or if you have `postman` check all API inside `Weather.rest`
+
+### Note
+
+* i have decided to use only routes/web.php instead of API because it is a small project and it is web project too

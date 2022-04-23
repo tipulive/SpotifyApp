@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Http;
 use App\Models\User;
 use App\Models\Listening;
 
+
 use Auth;
 use DB;
 
@@ -26,7 +27,9 @@ class AuthController extends Controller
         ->redirect();//redirect data to Spotify to Login
     }
     public function callback(){//this callback Method will be called after User Login because this redirect link is setup on both .env variable(SPOTIFY_REDIRECT_URI) or on Spotify Developer Account to redirect user After login
-        $user = Socialite::driver('spotify')->user();
+
+
+            $user = Socialite::driver('spotify')->user();
 
 
         $user = User::updateOrCreate([//if User exist in users table  then update Users table using Eloquent user Model or else add new user
@@ -60,6 +63,9 @@ class AuthController extends Controller
 
 
 
+
+
+
     }
     public function Users(){//Get all users
 
@@ -83,6 +89,14 @@ class AuthController extends Controller
 
                 ],200);
             }
+        }
+        else{
+            return response([
+                "result"=>false,
+                "status"=>"403",
+                "message"=>"unauthenticated Please Login",
+
+            ],201);
         }
 
 
