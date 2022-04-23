@@ -47,6 +47,13 @@ class AuthenticateTest extends TestCase
         $this->assertEquals("unauthenticated Please Login",$response['message']);
         $response->assertStatus(201);
     }
+    public function test_if_User_listening_is_authenticated(){
+
+        $response=$this->get('user_listening');
+
+        $this->assertEquals("unauthenticated Please Login",$response['message']);
+        $response->assertStatus(201);
+    }
 
 
 }
