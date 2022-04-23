@@ -1,4 +1,3 @@
-﻿# Weather-Forecast
 
 # SpotifyApp Preview 
 ![Preview](https://user-images.githubusercontent.com/80526946/164886008-a0e03514-be79-4139-aced-c57873d9d86b.gif)
@@ -45,12 +44,12 @@ You will need the following things properly installed on your computer.
 * Type `php artisan serve` Terminal under Project folder to run This Project.
 * [open Your Browser and visite](http://localhost:8000/auth/login)  this is to Authenticate or signup then call back will save callback payload data(user profile info ) to database
 - ## Run Some Application End Point
-- [\users`](http://localhost:8000/users) :to view all saved users from database
-- [\userStore_listening`](http://localhost:8000/userStore_listening) :to get recently-played from Spotify and Store in Database from 
+- [/users`](http://localhost:8000/users) :to view all saved users from database
+- [/userStore_listening`](http://localhost:8000/userStore_listening) :to get recently-played from Spotify and Store in Database from 
 
-- [\user_listening`](http://localhost:8000/user_listening) :to view all saved recently-played from database
+- [/user_listening`](http://localhost:8000/user_listening) :to view all saved recently-played from database
 
-- [\logout`](http://localhost:8000/logout) :to logout 
+- [/logout`](http://localhost:8000/logout) :to logout 
 
 ### Running Tests 
 
